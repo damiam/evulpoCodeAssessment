@@ -7,6 +7,7 @@
 const API_KEY = 'AIzaSyCfuQLHd0Aha7KuNvHK0p6V6R_0kKmsRX4'
 const DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
 
+// global variables
 let options = []
 let states = []
 let current_question_index = -1
@@ -17,6 +18,7 @@ let question_options = []
 let current_question = []
 let evaluated = false
 
+// start google api client
 function handleClientLoad() {
     gapi.load('client', initClient)
 }
@@ -32,6 +34,7 @@ function initClient() {
 	})
 }
 
+// call API for data
 function getExerciseData() {
 	gapi.client.sheets.spreadsheets.values.get({
 	    spreadsheetId: '1hzA42BEzt2lPvOAePP6RLLRZKggbg0RWuxSaEwd5xLc',
@@ -46,11 +49,13 @@ function getExerciseData() {
 	})
 }
 
+// Next question button handler 
 function next_question(){
     let next_button = document.querySelector('#next-button')
     let evaluate_button = document.querySelector('#eval-button')
     let evMessage = document.querySelector('#evaluation-message')
 
+    // if the there still are any more questions, select randomly form the remaining
     if(options.length !== 0){
         current_question_index = Math.floor(Math.random() * options.length)
 
@@ -59,6 +64,8 @@ function next_question(){
         }
 
         display_question()
+
+        // remove the question which has just been displayed
         ignore = options.splice(current_question_index, 1)
     } else {
         view_final_score()
@@ -69,6 +76,7 @@ function next_question(){
     evMessage.innerHTML = ''
 }
 
+// Handle the build of the answers
 function display_question(){
     let topic_title = document.querySelector('#subtitle')
     let optionsContainer = document.querySelector('#options-wrapper')
@@ -91,6 +99,7 @@ function display_question(){
     correct_answer_index = current_question[4]
 }
 
+// Handle the visual effect of the answers when clicked
 function toggleChoice(idx){
     let evaluate_button = document.querySelector('#eval-button')
     if(!evaluated){
@@ -111,6 +120,7 @@ function toggleChoice(idx){
     }
 }
 
+// Display the final stage of the form with the total score
 function view_final_score(){
     let topic_title = document.querySelector('#subtitle')
     let optionsContainer = document.querySelector('#options-wrapper')
@@ -120,6 +130,7 @@ function view_final_score(){
     topic_title.textContent = 'Congratulations! Your final score is: ' + total_score
 }
 
+// Handle the evaluate button
 function myEvaluation(){
 	let evMessage = document.querySelector('#evaluation-message')
     let evaluate_button = document.querySelector('#eval-button')
