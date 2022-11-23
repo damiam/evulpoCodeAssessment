@@ -12,24 +12,24 @@ let correct_answer_index;
 let chosen_answer_index;
 
 function handleClientLoad() {
-	gapi.load('client', initClient);
+    gapi.load('client', initClient);
 }
 
 function initClient() {
 	gapi.client.init({
-	  apiKey: API_KEY,
-	  discoveryDocs: DISCOVERY_DOCS
+	    apiKey: API_KEY,
+	    discoveryDocs: DISCOVERY_DOCS
 	}).then(function () {
-	  getExerciseData();
+	    getExerciseData();
 	}, function(error) {
-	  console.log(JSON.stringify(error, null, 2));
+	    console.log(JSON.stringify(error, null, 2));
 	});
 }
 
 function getExerciseData() {
 	gapi.client.sheets.spreadsheets.values.get({
-	  spreadsheetId: '1hzA42BEzt2lPvOAePP6RLLRZKggbg0RWuxSaEwd5xLc',
-	  range: 'Learning!A1:F10',
+	    spreadsheetId: '1hzA42BEzt2lPvOAePP6RLLRZKggbg0RWuxSaEwd5xLc',
+	    range: 'Learning!A1:F10',
 	}).then(function(response) {
 		console.log(response);
 		console.log(response.result.values);

@@ -13,17 +13,28 @@
 
 }
 .option{
-	width: 100px;
-	height: 50px;
+	width: 150px;
+	height: 75px;
 	 border-radius: 25px;
 	 padding-left:auto;
 	 padding-right:auto;
 	 margin-top:2px;
+     display: inline-block;
 }
 .text{
 	font-weight: bold;
 	font-size:16px;
 	color:#0000ff;
 	text-align: center;
-
+}
+#options-wrapper{
+    text-align: center;
+}
+.success{
+    color: darkgreen;
+    font-weight: bold;
+}
+.failed{
+    color: red;
+    font-weight: bold;
 }
